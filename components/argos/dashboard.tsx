@@ -19,7 +19,7 @@ function KPICard({
   progress?: number
 }) {
   return (
-    <div className="bg-card rounded-xl p-5 shadow-md border border-border flex flex-col gap-3 hover:shadow-lg transition-shadow">
+    <div className="bg-card rounded-xl p-5 shadow-md border border-border flex flex-col gap-4 hover:shadow-lg transition-shadow">
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
         <div className={`p-2.5 rounded-lg ${color}`}>{icon}</div>
@@ -29,16 +29,14 @@ function KPICard({
       {progress !== undefined && (
         <div className="space-y-1.5">
           <div className="flex justify-between text-xs text-muted-foreground">
-            <span>Ocupação atual</span>
-            <span className="font-semibold text-foreground">{progress}%</span>
+            <span>21 de 52 vagas</span>
           </div>
           <div className="w-full h-2.5 bg-muted rounded-full overflow-hidden">
             <div
-              className="h-full rounded-full transition-all duration-700"
+              className="h-full rounded transition-all duration-700"
               style={{
                 width: `${progress}%`,
-                backgroundColor:
-                  progress >= 85 ? '#EF4444' : progress >= 65 ? '#F0A500' : '#22C55E',
+                backgroundColor: '#27547c',
               }}
             />
           </div>
@@ -80,28 +78,28 @@ export function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <KPICard
           icon={<Package size={20} className="text-white" />}
-          label="Total no Pátio"
-          value={kpis.totalContainers}
-          sub={`de ${kpis.totalSlots} vagas disponíveis`}
+          label="CONTÊINERES NO PÁTIO"
+          value={21}
+          sub="31 vagas disponíveis"
           color="bg-[var(--navy)]"
         />
         <KPICard
           icon={<Warehouse size={20} className="text-white" />}
-          label="Taxa de Ocupação"
-          value={`${kpis.occupancyRate}%`}
+          label="TAXA DE OCUPAÇÃO"
+          value="40%"
           color="bg-blue-600"
-          progress={kpis.occupancyRate}
+          progress={40}
         />
         <KPICard
           icon={<Clock size={20} className="text-white" />}
-          label="Saídas em 48h"
-          value={kpis.exiting48h}
+          label="SAÍDA EM 48H"
+          value={21}
           sub="Contêineres com saída urgente"
           color="bg-amber-500"
         />
         <KPICard
           icon={<AlertTriangle size={20} className="text-white" />}
-          label="Alertas IMO"
+          label="ALERTAS IMO"
           value={kpis.imoAlerts}
           sub="Cargas perigosas no pátio"
           color="bg-red-600"
@@ -150,8 +148,8 @@ export function Dashboard() {
           </div>
           <div className="space-y-3">
             {[
-              { label: 'Vagas Livres', value: kpis.totalSlots - kpis.totalContainers, color: 'bg-green-500' },
-              { label: 'Ocupadas', value: kpis.totalContainers - kpis.imoAlerts, color: 'bg-[var(--slot-occupied)]' },
+              { label: 'Vagas Livres', value: 31, color: 'bg-green-500' },
+              { label: 'Ocupadas', value: 21, color: 'bg-[var(--slot-occupied)]' },
               { label: 'Zona IMO', value: kpis.imoAlerts, color: 'bg-amber-500' },
               { label: 'Sugerida (IA)', value: 1, color: 'bg-blue-500' },
             ].map((item) => (
