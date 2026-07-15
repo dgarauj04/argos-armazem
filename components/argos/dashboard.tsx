@@ -1,7 +1,7 @@
 'use client'
 
 import { Package, Warehouse, Clock, AlertTriangle, TrendingUp, Ship, Activity } from 'lucide-react'
-import { getKPIs, CONTAINERS_HISTORY } from '@/lib/mock-data'
+import { getKPIs } from '@/lib/mock-data'
 
 function KPICard({
   icon,
@@ -48,8 +48,6 @@ function KPICard({
 
 export function Dashboard() {
   const kpis = getKPIs()
-
-  const recent = CONTAINERS_HISTORY.slice(0, 5)
 
   return (
     <div className="space-y-6">
@@ -165,66 +163,49 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* Recent activity */}
+      {/* Bay distribution */}
       <div className="bg-card rounded-xl shadow-md border border-border overflow-hidden">
         <div className="px-5 py-4 border-b border-border flex items-center gap-2">
           <Activity size={18} className="text-[var(--navy)]" />
-          <h2 className="font-semibold text-foreground">Atividade Recente</h2>
+          <h2 className="font-semibold text-foreground">Distribuição por Baia</h2>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-muted/50">
-                <th className="text-left px-5 py-3 font-semibold text-muted-foreground">ID Contêiner</th>
-                <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Armador</th>
-                <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Categoria</th>
-                <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Peso</th>
-                <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Saída Prevista</th>
-                <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {recent.map((c, i) => (
-                <tr key={c.id} className={i % 2 === 0 ? 'bg-card' : 'bg-muted/20'}>
-                  <td className="px-5 py-3 font-mono font-semibold text-foreground">{c.id}</td>
-                  <td className="px-5 py-3 text-foreground">{c.armador}</td>
-                  <td className="px-5 py-3">
-                    <span
-                      className={`px-2 py-0.5 rounded text-xs font-semibold ${
-                        c.categoria === 'IMO'
-                          ? 'bg-amber-100 text-amber-800'
-                          : 'bg-blue-100 text-blue-800'
-                      }`}
-                    >
-                      {c.categoria}
-                    </span>
-                  </td>
-                  <td className="px-5 py-3 text-foreground">{c.peso}t</td>
-                  <td className="px-5 py-3 text-foreground">
-                    {new Date(c.dataSaida).toLocaleString('pt-BR', {
-                      day: '2-digit',
-                      month: '2-digit',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </td>
-                  <td className="px-5 py-3">
-                    <span
-                      className={`px-2 py-0.5 rounded text-xs font-semibold ${
-                        c.statusGeral === 'Saída Agendada'
-                          ? 'bg-amber-100 text-amber-800'
-                          : c.statusGeral === 'No Pátio'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-gray-100 text-gray-700'
-                      }`}
-                    >
-                      {c.statusGeral}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="p-5 space-y-4">
+          {[
+            { baia: 'Baia A', ocupadas: 2, total: 7, percentual: 28.6, cor: '#0B2D54' },
+            { baia: 'Baia B', ocupadas: 4, total: 7, percentual: 57.1, cor: '#1A4A7A' },
+            { baia: 'Baia C', ocupadas: 2, total: 7, percentual: 28.6, cor: '#2563EB' },
+            { baia: 'Baia D', ocupadas: 4, total: 7, percentual: 57.1, cor: '#F0A500' },
+            { baia: 'Baia E', ocupadas: 2, total: 7, percentual: 28.6, cor: '#0B2D54' },
+            { baia: 'Baia F', ocupadas: 1, total: 7, percentual: 14.3, cor: '#1A4A7A' },
+            { baia: 'Baia G', ocupadas: 2, total: 7, percentual: 28.6, cor: '#2563EB' },
+            { baia: 'Baia H', ocupadas: 0, total: 7, percentual: 0, cor: '#94A3B8' },
+          ].map((item) => (
+            <div key={item.baia} className="flex items-center gap-3">
+              <span className="text-sm font-medium text-foreground w-20 shrink-0">{item.baia}</span>
+              <div className="flex-1 h-7 bg-muted rounded overflow-hidden relative">
+                <div
+                  className="h-full rounded transition-all duration-700 flex items-center justify-center"
+                  style={{
+                    width: `${item.percentual}%`,
+                    backgroundColor: item.cor,
+                    minWidth: item.percentual > 0 ? '30px' : '0px',
+                  }}
+                >
+                  {item.percentual > 10 && (
+                    <span className="text-white text-xs font-bold">{item.ocupadas}</span>
+                  )}
+                </div>
+                {item.percentual <= 10 && item.ocupadas > 0 && (
+                  <span className="absolute left-2 top-1/2 -translate-y-1/2 text-foreground text-xs font-bold">
+                    {item.ocupadas}
+                  </span>
+                )}
+              </div>
+              <span className="text-xs text-muted-foreground w-20 text-right">
+                {item.ocupadas}/{item.total} ({item.percentual.toFixed(0)}%)
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
