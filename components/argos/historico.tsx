@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import { Search, Filter, ArrowUpDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { CONTAINERS_HISTORY, type ContainerDetail, type ContainerPriority, type ContainerStatus } from '@/lib/mock-data'
+import { CONTAINERS_HISTORY, type ContainerDetail, type ContainerPriority, type ContainerStatus, type ContainerCategory } from '@/lib/mock-data'
 
 const PRIORITY_COLORS: Record<ContainerPriority, string> = {
   Alta: 'bg-red-100 text-red-800',
@@ -91,22 +91,17 @@ export function Historico() {
           <Filter size={14} className="text-muted-foreground shrink-0" />
 
           {/* Status filter */}
-          <div className="flex gap-1.5 flex-wrap">
-            {(['Todos', 'No Pátio', 'Saída Agendada', 'Liberado', 'Aguardando'] as const).map((s) => (
-              <button
-                key={s}
-                onClick={() => setFilterStatus(s)}
-                className={cn(
-                  'px-3 py-1 rounded-full text-xs font-semibold border transition-colors',
-                  filterStatus === s
-                    ? 'bg-[var(--navy)] text-white border-[var(--navy)]'
-                    : 'bg-background text-foreground border-border hover:border-[var(--navy)]'
-                )}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value as ContainerStatus | 'Todos')}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--navy)] transition-colors hover:border-[var(--navy)]"
+          >
+            <option value="Todos">Todos os Status</option>
+            <option value="No Pátio">No Pátio</option>
+            <option value="Saída Agendada">Saída em 48h</option>
+            <option value="Liberado">Agendado</option>
+            <option value="Aguardando">Em Trânsito</option>
+          </select>
 
           <div className="w-px h-5 bg-border hidden sm:block" />
 
@@ -122,25 +117,16 @@ export function Historico() {
             <option value="Baixa">Baixa</option>
           </select>
 
-          <div className="w-px h-5 bg-border hidden sm:block" />
-
           {/* Category filter */}
-          <div className="flex gap-1.5 flex-wrap">
-            {(['Todos', 'Padrão', 'IMO'] as const).map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilterCategory(cat)}
-                className={cn(
-                  'px-3 py-1 rounded-full text-xs font-semibold border transition-colors',
-                  filterCategory === cat
-                    ? 'bg-[var(--navy)] text-white border-[var(--navy)]'
-                    : 'bg-background text-foreground border-border hover:border-[var(--navy)]'
-                )}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          <select
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value as 'Padrão' | 'IMO' | 'Todos')}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--navy)] transition-colors hover:border-[var(--navy)]"
+          >
+            <option value="Todos">Todas as Categorias</option>
+            <option value="Padrão">Padrão</option>
+            <option value="IMO">IMO</option>
+          </select>
         </div>
 
         {/* Result count */}
