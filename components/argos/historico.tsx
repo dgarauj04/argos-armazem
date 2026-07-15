@@ -111,22 +111,16 @@ export function Historico() {
           <div className="w-px h-5 bg-border hidden sm:block" />
 
           {/* Priority filter */}
-          <div className="flex gap-1.5 flex-wrap">
-            {(['Todos', 'Alta', 'Média', 'Baixa'] as const).map((p) => (
-              <button
-                key={p}
-                onClick={() => setFilterPriority(p)}
-                className={cn(
-                  'px-3 py-1 rounded-full text-xs font-semibold border transition-colors',
-                  filterPriority === p
-                    ? 'bg-[var(--gold)] text-[var(--navy-dark)] border-[var(--gold)]'
-                    : 'bg-background text-foreground border-border hover:border-[var(--gold)]'
-                )}
-              >
-                {p}
-              </button>
-            ))}
-          </div>
+          <select
+            value={filterPriority}
+            onChange={(e) => setFilterPriority(e.target.value as ContainerPriority | 'Todos')}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--gold)] transition-colors hover:border-[var(--gold)]"
+          >
+            <option value="Todos">Todas as Prioridades</option>
+            <option value="Alta">Alta</option>
+            <option value="Média">Média</option>
+            <option value="Baixa">Baixa</option>
+          </select>
 
           <div className="w-px h-5 bg-border hidden sm:block" />
 
