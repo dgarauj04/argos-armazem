@@ -51,7 +51,6 @@ export function Dashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Visão Geral</h1>
@@ -72,41 +71,38 @@ export function Dashboard() {
         </span>
       </div>
 
-      {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <KPICard
-          icon={<Package size={20} className="text-white" />}
+          icon={<Package size={20} className="text-stone-700" />}
           label="CONTÊINERES NO PÁTIO"
           value={21}
           sub="31 vagas disponíveis"
-          color="bg-[var(--navy)]"
+          color="bg-slate-500/20"
         />
         <KPICard
-          icon={<Warehouse size={20} className="text-white" />}
+          icon={<Warehouse size={20} className="text-cyan-800" />}
           label="TAXA DE OCUPAÇÃO"
           value="40%"
-          color="bg-blue-600"
+          color="bg-sky-300/25"
           progress={40}
         />
         <KPICard
-          icon={<Clock size={20} className="text-white" />}
+          icon={<Clock size={20} className="text-orange-600" />}
           label="SAÍDA EM 48H"
           value={21}
           sub="Contêineres com saída urgente"
-          color="bg-amber-500"
+          color="bg-amber-500/35"
         />
         <KPICard
-          icon={<AlertTriangle size={20} className="text-white" />}
+          icon={<AlertTriangle size={20} className="text-red-700" />}
           label="ALERTAS IMO"
           value={kpis.imoAlerts}
           sub="Cargas perigosas no pátio"
-          color="bg-red-600"
+          color="bg-red-400/35"
         />
       </div>
 
-      {/* Charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Distribuição por armador */}
         <div className="bg-card rounded-xl p-5 shadow-md border border-border lg:col-span-2">
           <div className="flex items-center gap-2 mb-4">
             <Ship size={18} className="text-[var(--navy)]" />
@@ -115,10 +111,10 @@ export function Dashboard() {
           <div className="space-y-3">
             {[
               { armador: 'MSC', count: 2, color: '#0B2D54' },
-              { armador: 'Maersk', count: 2, color: '#1A4A7A' },
+              { armador: 'Maersk', count: 2, color: '#1A7A78' },
               { armador: 'CMA CGM', count: 2, color: '#2563EB' },
               { armador: 'Hapag-Lloyd', count: 1, color: '#F0A500' },
-              { armador: 'Outros', count: 8, color: '#94A3B8' },
+              { armador: 'Outros', count: 8, color: '#9ea686' },
             ].map((item) => (
               <div key={item.armador} className="flex items-center gap-3">
                 <span className="text-sm text-muted-foreground w-28 shrink-0">{item.armador}</span>
@@ -138,7 +134,6 @@ export function Dashboard() {
           </div>
         </div>
 
-        {/* Status breakdown */}
         <div className="bg-card rounded-xl p-5 shadow-md border border-border">
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp size={18} className="text-[var(--navy)]" />
@@ -163,7 +158,6 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* Bay distribution */}
       <div className="bg-card rounded-xl shadow-md border border-border overflow-hidden">
         <div className="px-5 py-4 border-b border-border flex items-center gap-2">
           <Activity size={18} className="text-[var(--navy)]" />
@@ -172,13 +166,13 @@ export function Dashboard() {
         <div className="p-5 space-y-4">
           {[
             { baia: 'Baia A', ocupadas: 2, total: 7, percentual: 28.6, cor: '#0B2D54' },
-            { baia: 'Baia B', ocupadas: 4, total: 7, percentual: 57.1, cor: '#1A4A7A' },
+            { baia: 'Baia B', ocupadas: 4, total: 7, percentual: 57.1, cor: '#1A7A78' },
             { baia: 'Baia C', ocupadas: 2, total: 7, percentual: 28.6, cor: '#2563EB' },
             { baia: 'Baia D', ocupadas: 4, total: 7, percentual: 57.1, cor: '#F0A500' },
             { baia: 'Baia E', ocupadas: 2, total: 7, percentual: 28.6, cor: '#0B2D54' },
-            { baia: 'Baia F', ocupadas: 1, total: 7, percentual: 14.3, cor: '#1A4A7A' },
+            { baia: 'Baia F', ocupadas: 1, total: 7, percentual: 14.3, cor: '#1A7A78' },
             { baia: 'Baia G', ocupadas: 2, total: 7, percentual: 28.6, cor: '#2563EB' },
-            { baia: 'Baia H', ocupadas: 0, total: 7, percentual: 0, cor: '#94A3B8' },
+            { baia: 'Baia H', ocupadas: 4, total: 7, percentual: 57.1, cor: '#F0A500' },
           ].map((item) => (
             <div key={item.baia} className="flex items-center gap-3">
               <span className="text-sm font-medium text-foreground w-20 shrink-0">{item.baia}</span>

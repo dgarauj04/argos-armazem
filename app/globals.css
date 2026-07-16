@@ -34,7 +34,6 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
 
-  /* Argos custom tokens */
   --color-navy: var(--navy);
   --color-navy-dark: var(--navy-dark);
   --color-navy-light: var(--navy-light);
@@ -57,9 +56,8 @@
 :root {
   color-scheme: light;
 
-  /* Argos brand tokens */
-  --navy: #0B2D54;
-  --navy-dark: #071E3A;
+  --navy: #0f1e40;
+  --navy-dark: #0a3142;
   --navy-light: #1A4A7A;
   --gold: #F0A500;
   --gold-light: #FFD166;
@@ -68,7 +66,6 @@
   --slot-imo: #F59E0B;
   --slot-ai: #3B82F6;
 
-  /* shadcn tokens remapped to Argos palette */
   --background: #F1F5F9;
   --foreground: #0F172A;
   --card: #FFFFFF;
@@ -108,7 +105,6 @@
   }
 }
 
-/* Pulsing animation for AI suggested slot */
 @keyframes pulse-border {
   0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
   50% { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0); }

@@ -55,7 +55,6 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
 
   return (
     <>
-      {/* Mobile header bar */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14 bg-[var(--navy)] shadow-md">
         <div className="flex items-center gap-2">
           <Anchor size={22} className="text-[var(--gold)]" />
@@ -70,7 +69,6 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         </button>
       </header>
 
-      {/* Mobile overlay */}
       {mobileOpen && (
         <div
           className="lg:hidden fixed inset-0 z-40 bg-black/50"
@@ -79,7 +77,6 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         />
       )}
 
-      {/* Mobile drawer */}
       <aside
         className={cn(
           'lg:hidden fixed top-0 left-0 z-50 h-full w-64 bg-[var(--navy)] flex flex-col transition-transform duration-300 shadow-2xl',
@@ -122,14 +119,12 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         </div>
       </aside>
 
-      {/* Desktop sidebar */}
       <aside
         className={cn(
           'hidden lg:flex flex-col fixed top-0 left-0 h-full bg-[var(--navy)] z-30 transition-all duration-300 shadow-xl',
           collapsed ? 'w-16' : 'w-60'
         )}
       >
-        {/* Logo */}
         <div className={cn('flex items-center h-16 border-b border-white/10 px-4', collapsed ? 'justify-center' : 'gap-3')}>
           <Anchor size={24} className="text-[var(--gold)] shrink-0" />
           {!collapsed && (
@@ -140,7 +135,6 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
           )}
         </div>
 
-        {/* Nav items */}
         <nav className="flex-1 py-4 px-2 flex flex-col gap-1">
           {navItems.map((item) => (
             <button
@@ -152,7 +146,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                 collapsed ? 'justify-center' : '',
                 activeTab === item.id
                   ? 'bg-[var(--gold)] text-[var(--navy-dark)] font-semibold shadow-md'
-                  : 'text-white/80 hover:bg-[var(--navy-light)] hover:text-white'
+                  : 'text-white/80 hover:bg-[var(--navy-light)] hover:text-white cursor-pointer'
               )}
             >
               <span className="shrink-0">{item.icon}</span>
@@ -161,25 +155,29 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
           ))}
         </nav>
 
-        {/* Footer info */}
+        <div className="flex justify-center mb-8">
+          <a href="https://daraujodb-dev-frontend.vercel.app/" className='text-white/30'>
+            <img src="/fox-icon.svg" alt="Douglas Logo" className="w-14 h-14 opacity-25 hover:opacity-80 transition-opacity" />
+          </a>
+        </div>
+
         {!collapsed && (
           <div className="px-4 py-3 border-t border-white/10">
+            
             <p className="text-white/40 text-xs">Terminal Wilson Sons</p>
             <p className="text-white/30 text-xs">Porto de Santos — SP</p>
           </div>
         )}
 
-        {/* Collapse toggle */}
         <button
           onClick={() => setCollapsed(!collapsed)}
           aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
-          className="flex items-center justify-center h-10 border-t border-white/10 text-white/50 hover:text-white hover:bg-[var(--navy-light)] transition-colors"
+          className="flex items-center justify-center h-10 border-t border-white/10 text-white/50 cursor-pointer hover:text-white hover:bg-[var(--navy-light)] transition-colors"
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
       </aside>
 
-      {/* Spacer so content doesn't hide under sidebar */}
       <div className={cn('hidden lg:block shrink-0 transition-all duration-300', collapsed ? 'w-16' : 'w-60')} />
     </>
   )

@@ -2,7 +2,7 @@ export type SlotStatus = 'free' | 'occupied' | 'imo' | 'ai-suggested'
 
 export type ContainerCategory = 'Padrão' | 'IMO'
 export type ContainerPriority = 'Alta' | 'Média' | 'Baixa'
-export type ContainerStatus = 'No Pátio' | 'Saída Agendada' | 'Liberado' | 'Aguardando'
+export type ContainerStatus = 'No Pátio' | 'Saída em 48h' | 'Agendado' | 'Em Trânsito'
 
 export interface ContainerSlot {
   id: string // e.g. "A1"
@@ -26,7 +26,6 @@ export interface ContainerDetail {
 export const BAIAS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 export const ALTURAS = [1, 2, 3, 4, 5, 6, 7]
 
-// Pre-configured slots for the yard map
 const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDetail }> = {
   'A1': {
     status: 'occupied',
@@ -38,7 +37,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-16T08:00:00',
       armador: 'MSC',
       prioridade: 'Alta',
-      statusGeral: 'Saída Agendada',
+      statusGeral: 'Saída em 48h',
     },
   },
   'A2': {
@@ -96,7 +95,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-16T06:00:00',
       armador: 'OOCL',
       prioridade: 'Alta',
-      statusGeral: 'Saída Agendada',
+      statusGeral: 'Saída em 48h',
     },
   },
   'B4': { status: 'imo' },
@@ -114,7 +113,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-16T16:00:00',
       armador: 'Maersk',
       prioridade: 'Alta',
-      statusGeral: 'Saída Agendada',
+      statusGeral: 'Em Trânsito',
     },
   },
   'C2': { status: 'ai-suggested' },
@@ -146,7 +145,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-17T07:00:00',
       armador: 'Yang Ming',
       prioridade: 'Alta',
-      statusGeral: 'Saída Agendada',
+      statusGeral: 'Agendado',
     },
   },
   'D2': {
@@ -175,7 +174,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-16T12:00:00',
       armador: 'ZIM',
       prioridade: 'Alta',
-      statusGeral: 'Saída Agendada',
+      statusGeral: 'Agendado',
     },
   },
   'D7': { status: 'imo' },
@@ -242,7 +241,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-16T18:00:00',
       armador: 'CMA CGM',
       prioridade: 'Alta',
-      statusGeral: 'Saída Agendada',
+      statusGeral: 'Em Trânsito',
     },
   },
   'G2': { status: 'free' },
@@ -300,7 +299,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-16T08:00:00',
     armador: 'MSC',
     prioridade: 'Alta',
-    statusGeral: 'Saída Agendada',
+    statusGeral: 'Saída em 48h',
   },
   {
     id: 'OOLU8830241',
@@ -310,7 +309,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-16T06:00:00',
     armador: 'OOCL',
     prioridade: 'Alta',
-    statusGeral: 'Saída Agendada',
+    statusGeral: 'Saída em 48h',
   },
   {
     id: 'ZIMU9018450',
@@ -320,7 +319,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-16T12:00:00',
     armador: 'ZIM',
     prioridade: 'Alta',
-    statusGeral: 'Saída Agendada',
+    statusGeral: 'Saída em 48h',
   },
   {
     id: 'MAEU2984501',
@@ -330,7 +329,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-16T16:00:00',
     armador: 'Maersk',
     prioridade: 'Alta',
-    statusGeral: 'Saída Agendada',
+    statusGeral: 'Agendado',
   },
   {
     id: 'CRXU5509812',
@@ -340,7 +339,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-16T18:00:00',
     armador: 'CMA CGM',
     prioridade: 'Alta',
-    statusGeral: 'Saída Agendada',
+    statusGeral: 'Agendado',
   },
   {
     id: 'CMAU3812945',
@@ -360,7 +359,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-17T07:00:00',
     armador: 'Yang Ming',
     prioridade: 'Alta',
-    statusGeral: 'Saída Agendada',
+    statusGeral: 'Em Trânsito',
   },
   {
     id: 'HLXU5921037',
@@ -390,7 +389,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-19T15:00:00',
     armador: 'WHL',
     prioridade: 'Média',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Agendado',
   },
   {
     id: 'EVGU4156700',
@@ -410,7 +409,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-21T10:00:00',
     armador: 'PIL',
     prioridade: 'Baixa',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Saída em 48h',
   },
   {
     id: 'COSU3419078',
@@ -430,7 +429,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-23T09:00:00',
     armador: 'APL',
     prioridade: 'Baixa',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Em Trânsito',
   },
   {
     id: 'SEGU4412301',
@@ -440,11 +439,10 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-25T14:00:00',
     armador: 'Maersk',
     prioridade: 'Baixa',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Em Trânsito',
   },
 ]
 
-// KPI calculations
 export function getKPIs() {
   const totalSlots = BAIAS.length * ALTURAS.length // 56
   const occupiedSlots = Object.values(slotConfigs).filter(
@@ -471,12 +469,11 @@ export function getKPIs() {
   }
 }
 
-// Make.com endpoint
-export const MAKE_ENDPOINT = 'https://hook.us2.make.com/f6sl2uw0uuricknct8v0wrgaoflwmo6j'
+export const makeWebhookUrl = process.env.MAKE_WEBHOOK_URL
 
 export async function sendToMake(data: Record<string, unknown>) {
   try {
-    const res = await fetch(MAKE_ENDPOINT, {
+    const res = await fetch(makeWebhookUrl || '', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

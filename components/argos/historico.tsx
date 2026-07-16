@@ -12,17 +12,22 @@ const PRIORITY_COLORS: Record<ContainerPriority, string> = {
 }
 
 const STATUS_COLORS: Record<ContainerStatus, string> = {
-  'No Pátio': 'bg-blue-100 text-blue-800',
-  'Saída Agendada': 'bg-amber-100 text-amber-800',
-  Liberado: 'bg-green-100 text-green-800',
-  Aguardando: 'bg-gray-100 text-gray-700',
+  'No Pátio': 'bg-emerald-100 text-emerald-800 border-green-300',
+  'Saída em 48h': 'bg-amber-100 text-amber-800 border-amber-200',
+  Agendado: 'bg-sky-100 text-sky-800 border-sky-300',
+  'Em Trânsito': 'bg-gray-200 text-gray-700 border-gray-400',
+}
+
+const CATEGORY_COLORS: Record<ContainerCategory, string> = {
+  Padrão: 'bg-cyan-100 text-cyan-800',
+  IMO: 'bg-purple-100 text-purple-800',
 }
 
 export function Historico() {
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<ContainerStatus | 'Todos'>('Todos')
   const [filterPriority, setFilterPriority] = useState<ContainerPriority | 'Todos'>('Todos')
-  const [filterCategory, setFilterCategory] = useState<'Padrão' | 'IMO' | 'Todos'>('Todos')
+  const [filterCategory, setFilterCategory] = useState<ContainerCategory | 'Todos'>('Todos')
   const [sortField, setSortField] = useState<keyof ContainerDetail>('dataSaida')
   const [sortAsc, setSortAsc] = useState(true)
 
@@ -64,7 +69,6 @@ export function Historico() {
 
   return (
     <div className="space-y-5">
-      {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-foreground">Histórico de Contêineres</h1>
         <p className="text-muted-foreground text-sm mt-0.5">
@@ -72,9 +76,7 @@ export function Historico() {
         </p>
       </div>
 
-      {/* Filters */}
       <div className="bg-card rounded-xl shadow-md border border-border p-4 space-y-3">
-        {/* Search */}
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -86,11 +88,9 @@ export function Historico() {
           />
         </div>
 
-        {/* Filter chips */}
         <div className="flex flex-wrap gap-2 items-center">
           <Filter size={14} className="text-muted-foreground shrink-0" />
 
-          {/* Status filter */}
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value as ContainerStatus | 'Todos')}
@@ -98,14 +98,13 @@ export function Historico() {
           >
             <option value="Todos">Todos os Status</option>
             <option value="No Pátio">No Pátio</option>
-            <option value="Saída Agendada">Saída em 48h</option>
-            <option value="Liberado">Agendado</option>
-            <option value="Aguardando">Em Trânsito</option>
+            <option value="Saída em 48h">Saída em 48h</option>
+            <option value="Agendado">Agendado</option>
+            <option value="Em Trânsito">Em Trânsito</option>
           </select>
 
           <div className="w-px h-5 bg-border hidden sm:block" />
 
-          {/* Priority filter */}
           <select
             value={filterPriority}
             onChange={(e) => setFilterPriority(e.target.value as ContainerPriority | 'Todos')}
@@ -117,10 +116,9 @@ export function Historico() {
             <option value="Baixa">Baixa</option>
           </select>
 
-          {/* Category filter */}
           <select
             value={filterCategory}
-            onChange={(e) => setFilterCategory(e.target.value as 'Padrão' | 'IMO' | 'Todos')}
+            onChange={(e) => setFilterCategory(e.target.value as ContainerCategory | 'Todos')}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--navy)] transition-colors hover:border-[var(--navy)]"
           >
             <option value="Todos">Todas as Categorias</option>
@@ -129,13 +127,11 @@ export function Historico() {
           </select>
         </div>
 
-        {/* Result count */}
         <p className="text-xs text-muted-foreground">
           {filtered.length} registro{filtered.length !== 1 ? 's' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
         </p>
       </div>
 
-      {/* Table */}
       <div className="bg-card rounded-xl shadow-md border border-border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -190,7 +186,7 @@ export function Historico() {
                     <td className="px-5 py-3.5">
                       <span
                         className={cn(
-                          'px-2 py-0.5 rounded text-xs font-semibold whitespace-nowrap',
+                          'px-2 py-0.5 rounded border text-xs font-semibold whitespace-nowrap',
                           STATUS_COLORS[c.statusGeral]
                         )}
                       >
@@ -205,9 +201,7 @@ export function Historico() {
                       <span
                         className={cn(
                           'px-2 py-0.5 rounded text-xs font-semibold',
-                          c.categoria === 'IMO'
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-blue-100 text-blue-800'
+                          CATEGORY_COLORS[c.categoria]
                         )}
                       >
                         {c.categoria}
