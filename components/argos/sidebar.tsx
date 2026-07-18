@@ -104,7 +104,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
               className={cn(
                 'flex items-center gap-3 w-full px-4 py-3.5 rounded-lg text-sm font-medium transition-colors text-left',
                 activeTab === item.id
-                  ? 'bg-[var(--gold)] text-[var(--navy-dark)] font-semibold'
+                  ? 'bg-[var(--slot-ai)] text-[var(--navy-dark)] font-semibold'
                   : 'text-white/80 hover:bg-[var(--navy-light)] hover:text-white'
               )}
             >
@@ -126,7 +126,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         )}
       >
         <div className={cn('flex items-center h-16 border-b border-white/10 px-4', collapsed ? 'justify-center' : 'gap-3')}>
-          <Anchor size={24} className="text-[var(--gold)] shrink-0" />
+          <img src="/wilson_sons-logo-svg.svg" alt="Wilson Sons Logo" className="w-12 h-12" />
           {!collapsed && (
             <div>
               <p className="text-white font-bold text-base leading-tight">Argos Armazém</p>
@@ -145,8 +145,8 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                 'flex items-center gap-3 w-full px-3 py-3.5 rounded-lg text-sm font-medium transition-colors',
                 collapsed ? 'justify-center' : '',
                 activeTab === item.id
-                  ? 'bg-[var(--gold)] text-[var(--navy-dark)] font-semibold shadow-md'
-                  : 'text-white/80 hover:bg-[var(--navy-light)] hover:text-white cursor-pointer'
+                  ? 'bg-[var(--slot-ai)] text-[var(--navy-dark)] font-semibold shadow-md'
+                  : 'text-white/60 hover:bg-[var(--navy-light)] hover:text-white cursor-pointer'
               )}
             >
               <span className="shrink-0">{item.icon}</span>
@@ -157,7 +157,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
 
         <div className="flex justify-center mb-8">
           <a href="https://daraujodb-dev-frontend.vercel.app/" className='text-white/30'>
-            <img src="/fox-icon.svg" alt="Douglas Logo" className="w-14 h-14 opacity-25 hover:opacity-80 transition-opacity" />
+            <img src="/fox-icon.svg" alt="Douglas Logo" className="w-14 h-14 opacity-20 hover:opacity-80 transition-opacity" />
           </a>
         </div>
 

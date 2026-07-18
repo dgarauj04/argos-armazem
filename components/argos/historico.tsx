@@ -13,7 +13,7 @@ const PRIORITY_COLORS: Record<ContainerPriority, string> = {
 
 const STATUS_COLORS: Record<ContainerStatus, string> = {
   'No Pátio': 'bg-emerald-100 text-emerald-800 border-green-300',
-  'Saída em 48h': 'bg-amber-100 text-amber-800 border-amber-200',
+  'Saída em 48h': 'bg-amber-100/55 text-amber-800 border-amber-400',
   Agendado: 'bg-sky-100 text-sky-800 border-sky-300',
   'Em Trânsito': 'bg-gray-200 text-gray-700 border-gray-400',
 }

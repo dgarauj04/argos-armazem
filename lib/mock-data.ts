@@ -469,7 +469,7 @@ export function getKPIs() {
   }
 }
 
-export const makeWebhookUrl = process.env.MAKE_WEBHOOK_URL
+export const makeWebhookUrl = process.env.NEXT_PUBLIC_MAKE_WEBHOOK_URL
 
 export async function sendToMake(data: Record<string, unknown>) {
   try {
