@@ -145,9 +145,9 @@ export function NovoContainer() {
         </div>
       </div>
 
-      <div className="flex justify-center rounded-2xl">
-        <div className="w-full max-w-[1000px] bg-card rounded-2xl shadow-lg">
-          <div className="px-6 lg:px-8 pt-8 pb-5 border-b border-border bg-[var(--navy)]">
+      <div className="flex justify-center">
+        <div className="w-full max-w-[1000px] rounded-b-3xl shadow-lg">
+          <div className="px-6 lg:px-8 pt-8 pb-5 rounded-t-3xl bg-[var(--navy)]">
             <div className="flex items-center gap-3 mb-3">
               <PackagePlus size={24} className="text-[var(--gold)]" />
               <h2 className="text-xl font-bold text-white">Formulário de Entrada de Carga</h2>
@@ -159,7 +159,7 @@ export function NovoContainer() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} noValidate className="px-6 lg:px-8 py-8 space-y-8 bg-white">
+          <form onSubmit={handleSubmit} noValidate className="px-6 lg:px-8 py-8 space-y-8 bg-white rounded-b-3xl">
             <section>
               <SectionHeader title="Identificação do Contêiner" subtitle="Registre os dados únicos e características físicas da unidade." />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">

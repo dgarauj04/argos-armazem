@@ -10,13 +10,13 @@ const slots = generateYardSlots()
 function getSlotBg(status: SlotStatus): string {
   switch (status) {
     case 'free':
-      return 'bg-[var(--slot-free)] hover:brightness-90'
+      return 'bg-[var(--slot-free)] hover:brightness-85'
     case 'occupied':
-      return 'bg-[var(--slot-occupied)] hover:brightness-110'
+      return 'bg-[var(--slot-occupied)] hover:brightness-200'
     case 'imo':
-      return 'bg-[var(--slot-imo)] hover:brightness-90'
+      return 'bg-[var(--slot-imo)] hover:brightness-85'
     case 'ai-suggested':
-      return 'bg-[var(--slot-ai)] slot-ai-pulse hover:brightness-90'
+      return 'bg-[var(--slot-ai)] slot-ai-pulse hover:brightness-85'
     default:
       return 'bg-muted'
   }
@@ -33,12 +33,8 @@ function SlotDetailModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={`Detalhes da Vaga ${slot.id}`}>
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-
-      {/* Panel */}
       <div className="relative z-10 w-full max-w-md bg-card rounded-2xl shadow-2xl overflow-hidden">
-        {/* Header */}
         <div className="bg-[var(--navy)] px-5 py-4 flex items-center justify-between">
           <div>
             <p className="text-white/60 text-xs uppercase tracking-wider">Vaga</p>
@@ -75,7 +71,6 @@ function SlotDetailModal({
           </div>
         </div>
 
-        {/* Body */}
         <div className="px-5 py-4">
           {c ? (
             <div className="space-y-3">
@@ -210,14 +205,14 @@ function AIPanel() {
           <div className="flex gap-3">
             <button
               onClick={handleConfirm}
-              className="flex-1 flex items-center justify-center gap-2 bg-[var(--navy)] text-white font-semibold py-3 px-4 rounded-lg shadow hover:bg-[var(--navy-light)] active:scale-95 transition-all text-sm"
+              className="flex-1 flex items-center justify-center gap-2 bg-[var(--navy)] text-white font-semibold py-3 px-4 rounded-lg shadow cursor-pointer hover:bg-[var(--navy-light)] active:scale-95 transition-all text-sm"
             >
               <CheckCircle2 size={16} />
               Confirmar Alocação
             </button>
             <button
               onClick={handleReject}
-              className="flex-1 flex items-center justify-center gap-2 bg-white text-[var(--navy)] font-semibold py-3 px-4 rounded-lg shadow border border-border hover:bg-muted active:scale-95 transition-all text-sm"
+              className="flex-1 flex items-center justify-center gap-2 bg-white text-[var(--navy)] font-semibold py-3 px-4 rounded-lg shadow border border-border cursor-pointer hover:bg-[#fa6555] active:scale-95 transition-all text-sm"
             >
               <XCircle size={16} />
               Rejeitar / Outra Vaga
@@ -254,7 +249,6 @@ export function MapaPatio() {
 
   return (
     <div className="space-y-4">
-      {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-foreground">Mapa Interativo do Pátio</h1>
         <p className="text-muted-foreground text-sm mt-0.5">
@@ -262,7 +256,6 @@ export function MapaPatio() {
         </p>
       </div>
 
-      {/* Legend */}
       <div className="flex flex-wrap gap-3">
         {[
           { color: 'bg-[var(--slot-free)]', label: 'Vaga Livre' },
@@ -286,7 +279,6 @@ export function MapaPatio() {
           </div>
           <div className="p-4 overflow-x-auto">
             <div className="min-w-[480px]">
-              {/* Baia headers */}
               <div className="grid gap-1.5 mb-1.5" style={{ gridTemplateColumns: `2rem repeat(${BAIAS.length}, 1fr)` }}>
                 <div />
                 {BAIAS.map((b) => (
@@ -296,7 +288,6 @@ export function MapaPatio() {
                 ))}
               </div>
 
-              {/* Slot rows */}
               {ALTURAS.map((altura) => (
                 <div
                   key={altura}
@@ -314,7 +305,7 @@ export function MapaPatio() {
                         onClick={() => setSelectedSlot(slot)}
                         title={`Vaga ${slot.id}${slot.container ? ` — ${slot.container.id}` : ''}`}
                         className={cn(
-                          'aspect-square rounded-md transition-all duration-150 flex items-center justify-center text-[9px] font-bold text-white shadow-sm active:scale-95',
+                          'aspect-square rounded-md transition-all duration-150 flex items-center justify-center text-[9px] font-bold text-white cursor-pointer shadow-sm active:scale-95',
                           getSlotBg(slot.status)
                         )}
                         aria-label={`Vaga ${slot.id}, status: ${slot.status}`}
