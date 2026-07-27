@@ -6,9 +6,13 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Argos Armazém — Gêmeo Digital Portuário',
+  title: 'Argos Armazém — Portuário Digital',
   description: 'Sistema de gestão visual e alocação inteligente de contêineres em terminal portuário.',
-  generator: 'v0.app',
+  icons: {
+    icon: '/wilson_sons-logo.svg',
+    shortcut: '/wilson_sons-logo.svg',
+    apple: '/wilson_sons-logo.svg',
+  },
 }
 
 export const viewport: Viewport = {

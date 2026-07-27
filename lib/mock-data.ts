@@ -2,7 +2,7 @@ export type SlotStatus = 'free' | 'occupied' | 'imo' | 'ai-suggested'
 
 export type ContainerCategory = 'Padrão' | 'IMO'
 export type ContainerPriority = 'Alta' | 'Média' | 'Baixa'
-export type ContainerStatus = 'No Pátio' | 'Saída em 48h' | 'Agendado' | 'Em Trânsito'
+export type ContainerStatus = 'Alocado' | 'Saída em 48h' | 'Agendado' | 'Em Trânsito'
 
 export interface ContainerSlot {
   id: string // e.g. "A1"
@@ -14,7 +14,7 @@ export interface ContainerSlot {
 
 export interface ContainerDetail {
   id: string
-  peso: number // toneladas
+  peso: number
   alturaPilha: number
   categoria: ContainerCategory
   dataSaida: string
@@ -50,7 +50,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-17T14:00:00',
       armador: 'CMA CGM',
       prioridade: 'Média',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'A3': { status: 'free' },
@@ -69,7 +69,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-18T10:00:00',
       armador: 'Hapag-Lloyd',
       prioridade: 'Baixa',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'B2': {
@@ -82,7 +82,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-20T09:00:00',
       armador: 'Evergreen',
       prioridade: 'Baixa',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'B3': {
@@ -129,7 +129,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-22T11:00:00',
       armador: 'COSCO',
       prioridade: 'Baixa',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'C6': { status: 'free' },
@@ -158,7 +158,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-19T15:00:00',
       armador: 'WHL',
       prioridade: 'Média',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'D3': { status: 'free' },
@@ -190,7 +190,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-21T10:00:00',
       armador: 'PIL',
       prioridade: 'Baixa',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'E3': { status: 'free' },
@@ -205,7 +205,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-23T09:00:00',
       armador: 'APL',
       prioridade: 'Baixa',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'E6': { status: 'free' },
@@ -223,7 +223,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-18T13:00:00',
       armador: 'MSC',
       prioridade: 'Média',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'F4': { status: 'free' },
@@ -256,7 +256,7 @@ const slotConfigs: Record<string, { status: SlotStatus; container?: ContainerDet
       dataSaida: '2026-07-25T14:00:00',
       armador: 'Maersk',
       prioridade: 'Baixa',
-      statusGeral: 'No Pátio',
+      statusGeral: 'Alocado',
     },
   },
   'G5': { status: 'free' },
@@ -349,7 +349,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-17T14:00:00',
     armador: 'CMA CGM',
     prioridade: 'Média',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Alocado',
   },
   {
     id: 'YMLU7723001',
@@ -369,7 +369,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-18T10:00:00',
     armador: 'Hapag-Lloyd',
     prioridade: 'Baixa',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Alocado',
   },
   {
     id: 'TGHU8190023',
@@ -379,7 +379,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-18T13:00:00',
     armador: 'MSC',
     prioridade: 'Média',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Alocado',
   },
   {
     id: 'WHLC5019234',
@@ -399,7 +399,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-20T09:00:00',
     armador: 'Evergreen',
     prioridade: 'Baixa',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Alocado',
   },
   {
     id: 'PCIU4302811',
@@ -419,7 +419,7 @@ export const CONTAINERS_HISTORY: ContainerDetail[] = [
     dataSaida: '2026-07-22T11:00:00',
     armador: 'COSCO',
     prioridade: 'Baixa',
-    statusGeral: 'No Pátio',
+    statusGeral: 'Alocado',
   },
   {
     id: 'APLU3876520',
